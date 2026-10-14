@@ -1,4 +1,4 @@
-# Formation DevOps (2 jours) — Dépôt de TP
+# Formation sur les outils DevOps (2 jours) — Dépôt de TP
 
 Projet fil rouge : application Java Spring Boot → CI Jenkins → image Docker → déploiement Ansible / Compose / Kubernetes → supervision Prometheus/Grafana + logs ELK.
 
