@@ -1,0 +1,29 @@
+// TP1 - Intégration continue : compilation, tests unitaires, packaging
+pipeline {
+    agent any
+    options { timestamps() }
+    triggers { pollSCM('H/2 * * * *') }   // alternative simple au webhook GitHub
+
+    stages {
+        stage('Checkout') {
+            steps { checkout scm }
+        }
+        stage('Compilation') {
+            steps { dir('depot-tp/app') { sh 'mvn -B -q clean compile' } }
+        }
+        stage('Tests unitaires') {
+            steps { dir('depot-tp/app') { sh 'mvn -B test' } }
+            post { always { junit 'depot-tp/app/target/surefire-reports/*.xml' } }
+        }
+        stage('Package') {
+            steps {
+                dir('depot-tp/app') { sh 'mvn -B -DskipTests package' }
+                archiveArtifacts artifacts: 'depot-tp/app/target/*.jar', fingerprint: true
+            }
+        }
+    }
+    post {
+        success { echo 'Build OK' }
+        failure { echo 'Build en échec : consultez les rapports de tests' }
+    }
+}
