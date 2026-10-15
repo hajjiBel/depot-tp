@@ -32,14 +32,14 @@ class TaskServiceTest {
 
     @Test
     void toggleInvertsDoneFlag() {
-        Task t = service.add("Tester");
+        Task t = service.add("Tester....");
         assertTrue(service.toggle(t.id()).done());
         assertFalse(service.toggle(t.id()).done());
     }
 
     @Test
     void deleteRemovesTask() {
-        Task t = service.add("Supprimer moi");
+        Task t = service.add("Supprimer....");
         service.delete(t.id());
         assertTrue(service.findAll().isEmpty());
         assertThrows(NoSuchElementException.class, () -> service.delete(t.id()));
