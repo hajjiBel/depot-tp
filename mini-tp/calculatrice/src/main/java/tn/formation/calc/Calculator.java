@@ -5,7 +5,7 @@ public class Calculator {
     /** Prix TTC arrondi au centime. taux = 0.19 pour 19 %. */
     public double prixTtc(double ht, double taux) {
         if (ht < 0) {
-            throw new IllegalArgumentException("Le prix HT doit être positif");
+            throw new IllegalArgumentException("Le prix HT est positif");
         }
         return Math.round(ht * (1 + taux) * 100.0) / 100.0;
     }
